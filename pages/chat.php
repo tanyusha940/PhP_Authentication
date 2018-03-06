@@ -3,34 +3,39 @@
 include PATH.'/inc/head.php';
 
 ?>
+
 <div align="right">
 	<a href="?page=outlogin" >
-		<button type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-log-out" ></span> Выход</button>
+		<button id="output_button" type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-log-out" ></span> Выход</button>
 	</a>
 </div>
-<div class="lead" align="center" ><h2>Вы вошли как <?= $_SESSION['auth']['first_name'] ?> <?= $_SESSION['auth']['last_name'] ?>, через <?= $_SESSION['auth']['network'] ?></h2></div><br>
+<div class="lead" align="center" ><h2 style ="font-family:Trattatello, cursive ">Вы вошли как <?= $_SESSION['auth']['first_name'] ?> <?= $_SESSION['auth']['last_name'] ?>, через <?= $_SESSION['auth']['network'] ?></h2></div><br>
 
-
-<textarea id="message" rows = "5" class="form-control" placeholder="Type a message"></textarea>
-<button type="submit" id="send" class="btn btn-primary"><span class ="glyphicon glyphicon-send"></span>Отправить</button>
+<div class="col-sm-3 col-sm-offset-4 frame">		<!-- messages  -->
+	<ul></ul>
+	<div id="chatick" style="overflow-y:  scroll;top: 0px">
+		<div class="msj-rta macro" style="margin:auto; background:linen !important">                        
+			<div id="list" class="text text-r" style="background:wheat !important" ></div> 
+		</div>
+	</div>
+</div>
 <br>
 
-<div id="list"></div>
-<br>
-<div class="col-sm-3 col-sm-offset-4 frame">
-            <ul></ul>
-            <div>
-                <div class="msj-rta macro">                        
-                    <div class="text text-r" style="background:whitesmoke !important">
-                        <input class="mytext" placeholder="Type a message"/>
-                    </div> 
+<div class="col-sm-3 col-sm-offset-4 frame second_frame">
+	<ul></ul>
+	<div>
+		<div class="msj-rta macro" style="background:antuqueWhite !important; margin-left: 15px;">                        
+			<div class="text text-r" >
+				<input id="message" class="mytext" placeholder="Введите текст"/>
+			</div> 
 
-                </div>
-                <div style="padding:10px;">
-                    <span class="glyphicon glyphicon-share-alt"></span>
-                </div>                
-            </div>
-        </div>       
+		</div>
+		<div style="padding:10px;">
+			<button type="submit" id="send" class="btn btn-primary"><span class ="glyphicon glyphicon-send"></span></button>
+		</div>                
+	</div>
+</div>       
+
 <script>
 	(function(){
 		var list = $("#list");
@@ -41,7 +46,16 @@ include PATH.'/inc/head.php';
 				success: function(res) {
 					list.html("");
 					for (key in res) {
-						list.append("<div>" + res[key][0] + " " + res[key][1] + " " + res[key][2] + "</div>");
+						//list.append("<div class=\"\">" + res[key][0] + " " + res[key][1] + " " + res[key][2] + "</div>");
+						list.append('<li style="width:100%;list-style: none;" class="msg_block">' +
+										'<div class="msj macro">' +
+											'<div class="text text-l">' +
+												'<p><small>'+ res[key][0] +'</small></p>' +
+												'<p>'+ res[key][1] +'</p>' +
+												'<p><small>'+ res[key][2] +'</small></p>' +
+											'</div>' +
+										'</div>' +
+									'</li>');
 					}
 				}
 			});
@@ -65,6 +79,7 @@ include PATH.'/inc/head.php';
 			sendMessage(field.val());
 			field.val("");
 		});
+		
 		
 		getListMessages();
 		
