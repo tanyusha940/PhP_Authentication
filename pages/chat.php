@@ -4,7 +4,7 @@ include PATH.'/inc/head.php';
 
 ?>
 
-<div align="right">
+<div align="right" class ="button_margin">
 	<a href="?page=outlogin" >
 		<button id="output_button" type="submit"  class="btn btn-primary"><span class="glyphicon glyphicon-log-out" ></span> Выход</button>
 	</a>
@@ -13,7 +13,7 @@ include PATH.'/inc/head.php';
 
 <div class="col-sm-3 col-sm-offset-4 frame">		<!-- messages  -->
 	<ul></ul>
-	<div id="chatick" style="overflow-y:  scroll;top: 0px">
+	<div id="chatick" style="overflow-y:  scroll;top: 0px" >
 		<div class="msj-rta macro" style="margin:auto; background:linen !important">                        
 			<div id="list" class="text text-r" style="background:wheat !important" ></div> 
 		</div>
@@ -37,6 +37,7 @@ include PATH.'/inc/head.php';
 </div>       
 
 <script>
+
 	(function(){
 		var list = $("#list");
 		
@@ -56,6 +57,7 @@ include PATH.'/inc/head.php';
 											'</div>' +
 										'</div>' +
 									'</li>');
+									
 					}
 				}
 			});
@@ -87,6 +89,13 @@ include PATH.'/inc/head.php';
 			getListMessages();
 		}, 1000);
 	})();
+// $(document).ready(
+	// function()
+	// {
+		// $('div, html').scrollTop($(document).down());
+	// }
+// );
+
 </script>
 <?
 
